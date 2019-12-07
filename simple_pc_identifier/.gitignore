@@ -1,0 +1,4 @@
+/projects
+Makefile
+build/*
+!build/.gitkeep
