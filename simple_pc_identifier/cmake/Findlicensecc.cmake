@@ -49,22 +49,25 @@ if(LICENSECC_LOCATION)
 		include("${LICENSECC_LOCATION}/licensecc.cmake")
 		get_property(COMPILE_DEF TARGET licensecc::licensecc_static PROPERTY INTERFACE_COMPILE_DEFINITIONS)
 		if("HAS_OPENSSL" IN_LIST COMPILE_DEF AND NOT OpenSSL_FOUND)
-			message(DEBUG "Trying to find openssl (required by the target)")
+			message(VERBOSE "Trying to find openssl (required by the target)")
 		    SET ( OPENSSL_USE_STATIC_LIBS ON )
 		    find_package(OpenSSL REQUIRED COMPONENTS Crypto)
 		endif()
 	else()
+		#pointing to source?
 		if(EXISTS "${LICENSECC_LOCATION}/CMakeLists.txt")
 			if(licensecc_FIND_COMPONENTS)
 				set(LCC_PROJECT_NAME ${licensecc_FIND_COMPONENTS})
 			endif(licensecc_FIND_COMPONENTS)
 			add_subdirectory("${LICENSECC_LOCATION}" "${CMAKE_BINARY_DIR}/licensecc")
 		else()
+			#try find as install directory
 			find_package(licensecc HINTS 
-					${LICENSECC_LOCATION} ${LICENSECC_LOCATION}/build NO_MODULE)
+				${LICENSECC_LOCATION} ${CMAKE_CURRENT_LIST_DIR}/${LICENSECC_LOCATION}
+				CONFIG)
 		endif()
 	endif()
-ELSE()
+ELSE(LICENSECC_LOCATION)
 	if(licensecc_FIND_COMPONENTS)
 		find_package(licensecc COMPONENTS ${licensecc_FIND_COMPONENTS} 
 			PATHS ${CMAKE_BINARY_DIR} ${CMAKE_INSTALL_PREFIX} NO_MODULE) 
@@ -96,6 +99,6 @@ ELSE()
 			add_subdirectory("${PROJECT_SOURCE_DIR}/extern/licensecc")
 		endif()
 	ENDIF(NOT licensecc_FOUND)
-ENDIF()
+ENDIF(LICENSECC_LOCATION)
 
 
