@@ -1,6 +1,11 @@
 
-Compile and install open-license-manager. Let's call `LCC_INSTALLATION_DIR` the place where you installed
-open-license-manager, `LCC_SOURCE_DIR` the place where you download open-license-manager.
+
+This example show how to integrate the licensing system if you already have downloaded and compiled `open-license-manager` externally.
+
+If you want to compile and integrate all in one refer to the `submodule` example.
+
+## steps
+Compile and install open-license-manager. Let's call `LCC_INSTALLATION_DIR` the place where you installed open-license-manager, `LCC_SOURCE_DIR` the place where you download open-license-manager.
 
 ```
 git clone https://github.com/open-license-manager/examples.git
@@ -15,7 +20,8 @@ the software should report some kind of license error (depending on the configur
 
 ```
 $LCC_INSTALLATION_DIR/bin/lcc license issue -l $(pwd)/example.lic --project-folder  $LCC_SOURCE_DIR/projects/default
-``` 
+```
+
 ## LicenseCC not found <sup>1</sup> 
 Try to use an absolute path for `INSTALLATION_DIR` sometimes relative path doesn't work. You can also point `LICENSECC_LOCATION` to the source folder where you downloaded `open-license-manager` (but then you must be sure to install all the prerequisite libraries. Please follow build instructions for your environment)
 

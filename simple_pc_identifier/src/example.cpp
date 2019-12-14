@@ -43,7 +43,7 @@ int main(int argc, char *argv[]) {
 		cout << "    " << stringByEventType[result].c_str() << endl;
 		if (result == IDENTIFIERS_MISMATCH) {
 			if (identify_pc(STRATEGY_DEFAULT, pc_identifier,
-					PC_IDENTIFIER_SIZE + 1)) {
+			PC_IDENTIFIER_SIZE + 1)) {
 				cout << "the pc signature is :" << endl;
 				cout << "    " << pc_identifier << endl;
 			} else {
