@@ -19,7 +19,7 @@ cmake .. -DLICENSECC_LOCATION=$LCC_INSTALLATION_DIR
 the software should report some kind of license error (depending on the configuration of the library.
 
 ```
-$LCC_INSTALLATION_DIR/bin/lcc license issue -l $(pwd)/example.lic --project-folder  $LCC_SOURCE_DIR/projects/default
+$LCC_INSTALLATION_DIR/bin/lcc license issue -l $(pwd)/example.lic --project-folder  $LCC_SOURCE_DIR/projects/DEFAULT
 ```
 
 ## LicenseCC not found <sup>1</sup> 

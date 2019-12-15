@@ -4,5 +4,5 @@
 
 Examples of integration of `open-license-manager` in a C++ software.
 
-* [submodule](tree/develop/submodule) is the easiest way (in our opinion). Compile and install all the stuff in one go.
-* [simple-pc-identifier](tree/develop/simple_pc_identifier) is good if you've already compiled the library externally. 
+* [submodule](https://github.com/open-license-manager/examples/tree/develop/submodule) is the easiest way (in our opinion). Compile and install all the stuff in one go.
+* [simple-pc-identifier](https://github.com/open-license-manager/examples/tree/develop/simple_pc_identifier) is good if you've already compiled the library externally. 
