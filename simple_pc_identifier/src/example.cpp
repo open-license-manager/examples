@@ -41,14 +41,12 @@ int main(int argc, char *argv[]) {
 	if (result != LICENSE_OK) {
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
-		if (result == IDENTIFIERS_MISMATCH) {
-			if (identify_pc(STRATEGY_DEFAULT, pc_identifier,
-			PC_IDENTIFIER_SIZE + 1)) {
-				cout << "the pc signature is :" << endl;
-				cout << "    " << pc_identifier << endl;
-			} else {
-				cerr << "errors in identify_pc" << endl;
-			}
+		if (identify_pc(STRATEGY_DEFAULT, pc_identifier,
+		PC_IDENTIFIER_SIZE + 1)) {
+			cout << "pc signature is :" << endl;
+			cout << "    " << pc_identifier << endl;
+		} else {
+			cerr << "errors in identify_pc" << endl;
 		}
 	}
 

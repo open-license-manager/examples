@@ -8,7 +8,8 @@ git submodule update --recursive
 ```
 
 to update submodules. Check that the folder `submodule\extern\open-license-manager` exists. 
-Install the prerequisites for linux or windows.
+Install the prerequisites for [linux](https://github.com/open-license-manager/open-license-manager/wiki/Build-the-library) 
+or [windows](https://github.com/open-license-manager/open-license-manager/wiki/Build-the-library-windows).
 
 ```console
 cd build
@@ -41,7 +42,7 @@ Inserting the following lines into you CMakeLists.txt should get things right:
 ```cmake
 find_package(licensecc 2.0.0 REQUIRED)
 message(STATUS "LicenseCC found " ${licensecc_FOUND})
-add_executable(example src/example.cpp)
+add_executable(example src/example.cpp) 
 cmake_policy(SET CMP0028 NEW)
 target_link_libraries(example licensecc::licensecc_static)
 ```
