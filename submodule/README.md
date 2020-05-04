@@ -8,12 +8,12 @@ git submodule update --recursive
 ```
 
 to update submodules. Check that the folder `submodule\extern\open-license-manager` exists. 
-Install the prerequisites for [linux](https://github.com/open-license-manager/open-license-manager/wiki/Build-the-library) 
-or [windows](https://github.com/open-license-manager/open-license-manager/wiki/Build-the-library-windows).
+Install the prerequisites for [Linux](http://open-license-manager.github.io/open-license-manager/development/Build-the-library.html) 
+or [Windows](http://open-license-manager.github.io/open-license-manager/development/Build-the-library-windows.html).
 
 ```console
 cd build
-cmake ..  -DCMAKE_INSTALL_PREFIX=.
+cmake .. -DCMAKE_INSTALL_PREFIX=.
 make 
 make install
 ./example
@@ -27,6 +27,13 @@ bin/lcc license issue -p ../projects/DEFAULT/ -o example.lic
 
 >> License OK
 ```
+
+### The project doesn't compile
+
+* try a clean checkout or remove the folder `projects` and clean the `build` folder. 
+* try to compile `licensecc` standalone.
+* be sure to have installed the dependencies at the right version and to be running on a supported platform.
+* ask for help on [user fourum](https://groups.google.com/forum/#!forum/licensecc)
 
 ### Integrating into your project
 If you want to add a git submodule to your project run this command:
