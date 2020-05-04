@@ -20,5 +20,3 @@ message(STATUS "LicenseCC found " ${licensecc_FOUND})
 add_executable(example src/example.cpp)
 cmake_policy(SET CMP0028 NEW)
 target_link_libraries(example licensecc::licensecc_static)
-
-INCLUDE(CTest)
