@@ -13,7 +13,7 @@ or [Windows](http://open-license-manager.github.io/open-license-manager/developm
 
 ```console
 cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=.
+cmake .. -DCMAKE_INSTALL_PREFIX=.    #in windows you also need to specify -DBOOST_ROOT=`folder where boost is installed`
 cmake --build . --target install
 ./example
 

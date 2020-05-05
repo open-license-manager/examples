@@ -19,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 	LicenseInfo licenseInfo;
 	size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE + 1;
-	char pc_identifier[pc_id_sz];
+	char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE + 1];
 
 	LCC_EVENT_TYPE result = acquire_license(nullptr, nullptr, &licenseInfo);
 
