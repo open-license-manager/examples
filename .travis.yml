@@ -5,12 +5,11 @@ matrix:
    include:
    - os: linux
      dist: bionic
-     name: "Ubuntu 18.04 - Travis CI VM"
+     name: "Ubuntu 18.04 - simple_pc_identifier"
      addons:
         apt:
           packages:
              - cmake
-             - valgrind
              - libssl-dev
              - zlib1g-dev
              - libboost-dev
@@ -34,3 +33,26 @@ matrix:
      - cmake --build . 
      - lccgen license issue -p $TRAVIS_BUILD_DIR/open-license-manager/projects/DEFAULT -o example.lic
      - ./example  
+   - os: linux
+     dist: bionic
+     name: "Ubuntu 18.04 - submodule"
+     addons:
+        apt:
+          packages:
+             - cmake
+             - libssl-dev
+             - zlib1g-dev
+             - libboost-dev
+             - libboost-test-dev
+             - libboost-filesystem-dev
+             - libboost-iostreams-dev
+             - libboost-program-options-dev
+             - libboost-system-dev
+             - libboost-thread-dev
+             - libboost-date-time-dev
+     script: 
+     - cd submodule/build
+     - cmake .. -DCMAKE_INSTALL_PREFIX=.
+     - cmake --build . --target install 
+     - bin/lccgen license issue -p ../projects/DEFAULT/ -o example.lic
+     - ./example

@@ -14,8 +14,7 @@ or [Windows](http://open-license-manager.github.io/open-license-manager/developm
 ```console
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=.
-make 
-make install
+cmake --build . --target install
 ./example
 
 >> License file not found

@@ -1,5 +1,6 @@
 
 [![Standard](https://img.shields.io/badge/c%2B%2B-11-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization)
+[![Build Status](https://travis-ci.org/open-license-manager/examples.svg?branch=develop)](https://travis-ci.org/open-license-manager/examples)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
 Examples of integration of `open-license-manager` in a C++ software.
