@@ -32,4 +32,5 @@ matrix:
      - cd $TRAVIS_BUILD_DIR/simple_pc_identifier/build
      - cmake ..
      - cmake --build . 
-     - ./example    
+     - lccgen license issue -p ../../../open-license-manager/projects/DEFAULT/ -o example.lic
+     - ./example  
