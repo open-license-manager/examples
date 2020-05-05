@@ -1,0 +1,35 @@
+language: cpp
+#services: docker
+
+matrix:
+   include:
+   - os: linux
+     dist: bionic
+     name: "Ubuntu 18.04 - Travis CI VM"
+     addons:
+        apt:
+          packages:
+             - cmake
+             - valgrind
+             - libssl-dev
+             - zlib1g-dev
+             - libboost-dev
+             - libboost-test-dev
+             - libboost-filesystem-dev
+             - libboost-iostreams-dev
+             - libboost-program-options-dev
+             - libboost-system-dev
+             - libboost-thread-dev
+             - libboost-date-time-dev
+     before-script:
+     - git clone --recursive https://github.com/open-license-manager/open-license-manager.git
+     - cd open-license-manager/build
+     - cmake ..
+     - cmake --build .
+     - sudo make install
+     script: 
+     - echo "build simple_pc_identifier"
+     - cd $TRAVIS_BUILD_DIR/simple_pc_identifier/build
+     - cmake ..
+     - cmake --build . 
+     - ./example    
