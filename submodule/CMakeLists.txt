@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 3.6)
 
 SET(CMAKE_DISABLE_SOURCE_CHANGES ON)
 SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
@@ -20,3 +20,6 @@ message(STATUS "LicenseCC found " ${licensecc_FOUND})
 add_executable(example src/example.cpp)
 cmake_policy(SET CMP0028 NEW)
 target_link_libraries(example licensecc::licensecc_static)
+
+#run open-license-manager tests
+INCLUDE(CTest)
