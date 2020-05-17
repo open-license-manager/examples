@@ -54,5 +54,6 @@ matrix:
      - cd submodule/build
      - cmake .. -DCMAKE_INSTALL_PREFIX=.
      - cmake --build . --target install 
+     - ctest 
      - bin/lccgen license issue -p ../projects/DEFAULT/ -o example.lic
      - ./example
