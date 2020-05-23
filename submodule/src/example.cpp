@@ -24,12 +24,11 @@ int main(int argc, char *argv[]) {
 	LCC_EVENT_TYPE result = acquire_license(nullptr, nullptr, &licenseInfo);
 
 	if (result == LICENSE_OK) {
+		cout << "license OK" << endl;
 		if (!licenseInfo.linked_to_pc) {
 			cout << "No hardware signature in license file. This is a 'demo' license that works on every pc." << endl
 				 << "To generate a 'single pc' license call 'issue license' with option -s " << endl
 				 << "and the hardware identifier obtained before." << endl;
-		} else {
-			cout << "license OK" << endl;
 		}
 	}
 	if (result != LICENSE_OK) {
