@@ -15,10 +15,10 @@ cd examples/simple_pc_identifier
 export LCC_INSTALLATION_DIR = ... #folder where you installed open-license-manager <sup>1</sup>
 cd build 
 cmake .. -Dlicensecc_DIR=$LCC_INSTALLATION_DIR/lib/cmake/licensecc
+make
 ./example
-
 ```
-the software should report some kind of license error (depending on the configuration of the library).
+the software should report some kind of license error (depending on the configuration of the library). To generate the missing license:
 
 ```
 $LCC_INSTALLATION_DIR/bin/lccgen license issue -o example.lic --project-folder $LCC_SOURCE_DIR/projects/DEFAULT
