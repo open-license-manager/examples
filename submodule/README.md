@@ -32,7 +32,7 @@ bin/lccgen license issue -p ../projects/DEFAULT/ -o example.lic
 *  try a clean checkout or remove the folder `projects` and clean the `build` folder. 
 *  try to compile `licensecc` standalone.
 *  be sure to have installed the dependencies at the right version and to be running on a supported platform.
-*  ask for help on [user fourum](https://groups.google.com/forum/#!forum/licensecc).
+*  ask for help on [user forum](https://groups.google.com/forum/#!forum/licensecc).
 
 ### Integrating into your project
 If you want to add a git submodule to your project run this command:
