@@ -1,7 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <licensecc/licensecc.h>
-#include <string.h>
+
 using namespace std;
 
 int main(int argc, char *argv[]) {
@@ -18,20 +18,14 @@ int main(int argc, char *argv[]) {
 		{IDENTIFIERS_MISMATCH, "Calculated identifier and the one provided in license didn't match"}};
 
 	LicenseInfo licenseInfo;
+	size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE + 1;
+	char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE + 1];
 
 	LCC_EVENT_TYPE result = acquire_license(nullptr, nullptr, &licenseInfo);
 
 	if (result == LICENSE_OK) {
-		cout << "license OK" << endl;
-		if (!licenseInfo.linked_to_pc) {
-			cout << "No hardware signature in license file. This is a 'demo' license that works on every pc." << endl
-				 << "To generate a 'single pc' license call 'issue license' with option -s " << endl
-				 << "and the hardware identifier obtained before." << endl;
-		}
-	}
-	if (result != LICENSE_OK) {
-		size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE;
-		char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE + 1];
+		cout << "license for main software OK" << endl;
+	} else {
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
 		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, nullptr)) {
@@ -40,6 +34,16 @@ int main(int argc, char *argv[]) {
 		} else {
 			cerr << "errors in identify_pc" << endl;
 		}
+		return -1;
+	}
+	// Call the software
+	CallerInformations callerInfo = {"\0", "MY_AWESOME_FUNC"};
+	LCC_EVENT_TYPE result = acquire_license(&callerInfo, nullptr, &licenseInfo);
+
+	if (result == LICENSE_OK) {
+		cout << "MY_AWESOME_FUNC is licensed" << endl;
+	} else {
+		cout << "MY_AWESOME_FUNC is NOT licensed" << endl;
 	}
 
 	return result;

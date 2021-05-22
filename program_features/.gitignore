@@ -1,0 +1,6 @@
+/projects
+Makefile
+build/*
+!build/.gitkeep
+extern/*
+!extern/.gitkeep
