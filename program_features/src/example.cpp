@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
 	}
 	// Call the software
 	CallerInformations callerInfo = {"\0", "MY_AWESOME_FUNC"};
-	LCC_EVENT_TYPE result = acquire_license(&callerInfo, nullptr, &licenseInfo);
+	result = acquire_license(&callerInfo, nullptr, &licenseInfo);
 
 	if (result == LICENSE_OK) {
 		cout << "MY_AWESOME_FUNC is licensed" << endl;

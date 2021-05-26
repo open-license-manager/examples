@@ -8,3 +8,11 @@ Examples of integration of `licensecc` in a C++ software.
 * [submodule](https://github.com/open-license-manager/examples/tree/develop/submodule): compile and install all the "stuff" in one go.
 * [simple-pc-identifier](https://github.com/open-license-manager/examples/tree/develop/simple_pc_identifier) is good if you've already compiled the library externally. 
 * [program_features](https://github.com/open-license-manager/examples/tree/develop/program_features) An advanced example showing how to enable/disable features in your software with a license file. 
+
+
+## update previous versions
+If you have already checked out `examples` project and you want to pull recent commits:
+
+```
+git submodule foreach git pull origin develop
+``` 

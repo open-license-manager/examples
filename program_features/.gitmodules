@@ -1,4 +1,0 @@
-[submodule "submodule/extern/licensecc"]
-	path = submodule/extern/licensecc
-	url = https://github.com/open-license-manager/licensecc.git
-	branch = develop

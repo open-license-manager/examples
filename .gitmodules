@@ -2,8 +2,10 @@
 	path = submodule/extern/open-license-manager
 	url = https://github.com/open-license-manager/licensecc.git
 	branch = .
-
-[submodule "submodule/extern/open-license-manager"]
-	path = submodule/extern/open-license-manager
+	ignore = all
+	
+[submodule "program_features/extern/open-license-manager"]
+	path = program_features/extern/open-license-manager
 	url = https://github.com/open-license-manager/licensecc.git
 	branch = .
+	ignore = all

@@ -9,7 +9,7 @@ git submodule init --recursive
 git submodule update --recursive
 ```
 
-Check that the folder `submodule\extern\licensecc` exists. 
+Check that the folder `program_features\extern\licensecc` exists. 
 Install the prerequisites for [Linux](http://open-license-manager.github.io/licensecc/development/Build-the-library.html) 
 or [Windows](http://open-license-manager.github.io/licensecc/development/Build-the-library-windows.html). 
 
