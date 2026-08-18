@@ -44,7 +44,7 @@ jobs:
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: >
         /usr/bin/cmake -B ${{ steps.strings.outputs.build-output-dir }}
-        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_BUILD_TYPE=Debug
         -S ${{ github.workspace }}/submodule
         -DCMAKE_INSTALL_PREFIX=${{ steps.strings.outputs.build-output-dir }}
         -DLCC_PROJECT_NAME=DEFAULT
@@ -52,10 +52,10 @@ jobs:
       # Build and install the example (also builds and installs licensecc from the submodule).
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
       run: |
-           /usr/bin/cmake --build ${{ steps.strings.outputs.build-output-dir }} -j $(nproc) --target install --config ${{ matrix.build_type }}
+           /usr/bin/cmake --build ${{ steps.strings.outputs.build-output-dir }} -j $(nproc) --target install --config Debug
     - name: Test
       working-directory: ${{ steps.strings.outputs.build-output-dir }}
-      run: ctest . --build-config ${{ matrix.build_type }} --output-on-failure
+      run: ctest . --build-config Debug --output-on-failure
       env:
          CTEST_OUTPUT_ON_FAILURE: 1
          BOOST_TEST_LOG_LEVEL: message
