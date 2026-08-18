@@ -18,8 +18,7 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 find_package(licensecc 2.1.0 REQUIRED)
 message(STATUS "LicenseCC found " ${licensecc_DIR})
 add_executable(example src/example.cpp)
-cmake_policy(SET CMP0028 NEW)
-target_link_libraries(example licensecc::licensecc_static)
+target_link_libraries(example licensecc::licensecc)
 
 #run open-license-manager tests
 INCLUDE(CTest)

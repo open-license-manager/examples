@@ -4,8 +4,6 @@ This example show how to integrate the licensing system if you already have down
 You can find the compilation instructions for [Linux](http://open-license-manager.github.io/open-license-manager/development/Build-the-library.html) 
 and [Windows](http://open-license-manager.github.io/open-license-manager/development/Build-the-library-windows.html) on the project website.
 
-If you are brave and you want to compile and integrate all in one go refer to the [submodule](https://github.com/open-license-manager/examples/tree/develop/submodule) example.
-
 ## steps
 Compile and *install* (`make install`) open-license-manager. Let's call `LCC_INSTALLATION_DIR` the place where you installed open-license-manager, `LCC_SOURCE_DIR` the place where you download `open-license-manager`.
 

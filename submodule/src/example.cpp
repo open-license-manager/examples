@@ -4,7 +4,7 @@
 #include <string.h>
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
 	unordered_map<LCC_EVENT_TYPE, string> stringByEventType = {
 		{LICENSE_OK, "OK "},
 		{LICENSE_FILE_NOT_FOUND, "license file not found "},
@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	}
 	if (result != LICENSE_OK) {
 		size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE;
-		char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE + 1];
+		char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE];
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
 		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, nullptr)) {

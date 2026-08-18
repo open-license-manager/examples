@@ -10,8 +10,8 @@ Imported Targets
 ^^^^^^^^^^^^^^^^
 This module provides the following imported targets, if found:
 
-``licensecc::licensecc_static``
-  The licensecc static library
+``licensecc::licensecc``
+  The licensecc library
 
 If licensecc is not found this module will try to download it as a submodule
 Git must be installed.
@@ -50,7 +50,7 @@ if(LICENSECC_LOCATION)
 	#maybe it's pointing to the build directory
 	if(EXISTS "${LICENSECC_LOCATION}/licensecc.cmake")
 		include("${LICENSECC_LOCATION}/licensecc.cmake")
-		get_property(COMPILE_DEF TARGET licensecc::licensecc_static PROPERTY INTERFACE_COMPILE_DEFINITIONS)
+		get_property(COMPILE_DEF TARGET licensecc::licensecc PROPERTY INTERFACE_COMPILE_DEFINITIONS)
 		if("HAS_OPENSSL" IN_LIST COMPILE_DEF AND NOT OpenSSL_FOUND)
 			message(VERBOSE "Trying to find openssl (required by the target)")
 		    SET ( OPENSSL_USE_STATIC_LIBS ON )

@@ -2,3 +2,5 @@
 Makefile
 build/*
 !build/.gitkeep
+
+.vscode

@@ -1,0 +1,70 @@
+name: Linux submodule example
+on:
+   push:
+     branches: [ "master", "develop" ]
+   pull_request:
+     branches: [ "develop" ]
+permissions:
+   contents: read
+   actions: read
+   packages: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    name: Sub '${{ matrix.os }}'
+    strategy:
+      fail-fast: false
+      matrix:
+        #os: [ubuntu-24.04-arm, ubuntu-22.04, ubuntu-26.04]
+        os: [ubuntu-26.04]
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        # the submodule example needs licensecc checked out under submodule/extern/open-license-manager
+        submodules: recursive
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/submodule/build" >> "$GITHUB_OUTPUT"
+    - name: Dependencies
+      run: >
+          sudo apt-get update && sudo apt-get -y install cmake libssl-dev zlib1g-dev libboost-dev libboost-test-dev
+          libboost-filesystem-dev libboost-iostreams-dev libboost-program-options-dev libboost-system-dev
+          libboost-thread-dev libboost-date-time-dev
+      # Install extra deps for ubuntu 26-04 (and add valgrind and coverage tests)
+    - name: Extra Dependecies Ubuntu 26.04
+      if: ${{ (matrix.os == 'ubuntu-26.04' || matrix.os == 'ubuntu-26.04-arm') }}
+      run: >
+        sudo apt-get install -y libjitterentropy3-dev valgrind lcov gcovr
+    - name: Configure CMake
+      # Configure the submodule example in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: >
+        /usr/bin/cmake -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -S ${{ github.workspace }}/submodule
+        -DCMAKE_INSTALL_PREFIX=${{ steps.strings.outputs.build-output-dir }}
+        -DLCC_PROJECT_NAME=DEFAULT
+    - name: Build
+      # Build and install the example (also builds and installs licensecc from the submodule).
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: |
+           /usr/bin/cmake --build ${{ steps.strings.outputs.build-output-dir }} -j $(nproc) --target install --config ${{ matrix.build_type }}
+    - name: Test
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: ctest . --build-config ${{ matrix.build_type }} --output-on-failure
+      env:
+         CTEST_OUTPUT_ON_FAILURE: 1
+         BOOST_TEST_LOG_LEVEL: message
+    - name: Issue License
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: |
+           ${{ steps.strings.outputs.build-output-dir }}/bin/lccgen license issue -p ${{ github.workspace }}/submodule/projects/DEFAULT/ -o ${{ steps.strings.outputs.build-output-dir }}/example.lic
+           ./example
+    - name: Run example
+      working-directory: ${{ steps.strings.outputs.build-output-dir }}
+      run: 
+           ${{ steps.strings.outputs.build-output-dir }}/example
