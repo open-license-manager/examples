@@ -21,8 +21,8 @@ jobs:
     steps:
     - uses: actions/checkout@v6
       with:
-        # the submodule example needs licensecc checked out under submodule/extern/open-license-manager
         submodules: recursive
+        token: ${{ secrets.GITHUB_TOKEN }}
     - name: Set reusable strings
       # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
       id: strings
