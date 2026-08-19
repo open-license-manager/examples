@@ -12,12 +12,12 @@ permissions:
 jobs:
   compile-basic-features:
     runs-on: ${{ matrix.os }}
-    name: Hardware detect '${{ matrix.os }}'
+    name: compile basic_features '${{ matrix.os }}'
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
-        #os: [ubuntu-24.04-arm, ubuntu-22.04, ubuntu-26.04]
-        os: [ubuntu-26.04]
+        os: [ubuntu-24.04-arm, ubuntu-22.04, ubuntu-26.04]
+        #os: [ubuntu-26.04]
     steps:
     - uses: actions/checkout@v6
       with:
@@ -64,9 +64,38 @@ jobs:
       if: ${{ matrix.os == 'ubuntu-26.04' }}
       uses: actions/upload-artifact@v4
       with:
+        retention-days: 3
         name: basic_features-ubuntu-26.04
         path: |
           ${{ steps.strings.outputs.build-output-dir }}/bin/hardware_detection/hardware_detection
           ${{ steps.strings.outputs.build-output-dir }}/bin/program_features/program_features
-         
-  
+          ${{ steps.strings.outputs.build-output-dir }}/bin/lccgen
+          ${{ github.workspace }}/basic_features/projects/
+
+  test-hardware-detection:
+    needs: compile-basic-features
+    runs-on: ubuntu-26.04
+    name: Hardware Detection (generate-lic)
+    steps:
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "extract-dir=${{ github.workspace }}/extract" >> "$GITHUB_OUTPUT"
+    - name: Download artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: basic_features-ubuntu-26.04
+        path: ${{ steps.strings.outputs.extract-dir }}
+    - name: List downloaded artifacts (verbose)
+      run: find ${{ steps.strings.outputs.extract-dir }} -type f | sort
+    - name: Issue license for hardware_detection
+      working-directory: ${{ steps.strings.outputs.extract-dir }}
+      run: >
+        ${{ steps.strings.outputs.extract-dir }}/bin/lccgen license issue
+        -p ${{ steps.strings.outputs.extract-dir }}/projects/DEFAULT/
+        -o ${{ steps.strings.outputs.extract-dir }}/bin/hardware_detection/hardware_detection.lic      
+    - name: Run the executable
+      working-directory: ${{ steps.strings.outputs.extract-dir }}
+      run: >
+        ${{ steps.strings.outputs.extract-dir }}/bin/hardware_detection/hardware_detection
