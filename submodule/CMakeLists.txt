@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.6)
+cmake_minimum_required(VERSION 3.16)
 
 project (simple_pc_id VERSION 2.1.0 LANGUAGES CXX)
 
