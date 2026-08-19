@@ -92,10 +92,10 @@ jobs:
     - name: Issue license for hardware_detection
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
-        ${{ steps.strings.outputs.extract-dir }}/bin/lccgen license issue
+        ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen license issue
         -p ${{ steps.strings.outputs.extract-dir }}/projects/DEFAULT/
-        -o ${{ steps.strings.outputs.extract-dir }}/bin/hardware_detection/hardware_detection.lic      
+        -o ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection.lic      
     - name: Run the executable
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
-        ${{ steps.strings.outputs.extract-dir }}/bin/hardware_detection/hardware_detection
+        ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection

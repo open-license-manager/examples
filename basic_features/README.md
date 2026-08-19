@@ -1,54 +1,129 @@
 
-This project show how to add the library as a git submodule of your project. This is the recommended integration way.
-First download all the libraries for your environment. If you didn't checkout with the `--recursive` option you can run
+# basic_features
+
+Two minimal C++ examples showing the basic `licensecc` features, with the library integrated as a git submodule (the recommended integration method):
+
+- `hardware_detection` — PC-locked licensing: acquire the license and, on failure, print the PC identifier and execution-environment information to issue a single-PC license.
+- `program_features` — verify individual 'features' of one application ("program features") in addition to the main program. Useful if you want to enable or disable functions of your software using the license file.
+
+## Prerequisites
+
+Build and install `licensecc` first, following the library's own build and dependency instructions:
+
+> You can find detailed instructions for [Linux](http://open-license-manager.github.io/licensecc/development/Build-the-library.html) 
+> or [Windows](http://open-license-manager.github.io/licensecc/development/Build-the-library-windows.html) in the project web site.
+
+This is to solve most of the dependency/compilation issue you may encounter, in an isolated environment. This will make sure your build environment is sane, and you don't get stuck in a submodule of a submodule compilation issue.
+
+The examples pull `licensecc` as a submodule at `extern/open-license-manager`. If you cloned without `--recursive`:
 
 ```console
-git submodule init --recursive
-git submodule update --recursive
+git submodule update --init --recursive
 ```
 
-to update submodules. Check that the folder `submodule\extern\open-license-manager` exists. 
-Install the prerequisites for [Linux](http://open-license-manager.github.io/open-license-manager/development/Build-the-library.html) 
-or [Windows](http://open-license-manager.github.io/open-license-manager/development/Build-the-library-windows.html).
+## Build
 
 ```console
-cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=.    #in windows you also need to specify -DBOOST_ROOT=`folder where boost is installed`
-cmake --build . --target install
-./example
-
->> License file not found
+cd basic_features/build
+cmake -S .. -B . -DCMAKE_INSTALL_PREFIX=. -DLCC_PROJECT_NAME=DEFAULT
+cmake --build . -j8 --target install
 ```
 
-```console
-bin/lccgen license issue -p ../projects/DEFAULT/ -o example.lic
-./example
+- `LCC_PROJECT_NAME` must match a project created with `lcc project create`; `DEFAULT` is the mock project shipped for these examples.
+- On Windows, add `-DBOOST_ROOT=<boost install path>` to the configure line.
 
->> License OK
+The executables are produced in `basic_features/build/bin/hardware_detection/` and `basic_features/build/bin/program_features/`.
+
+Without a valid license they both print `license file not found` followed by the PC identifier.
+
+## Examples
+
+### hardware_detection
+
+Acquires the default license with `acquire_license(nullptr, nullptr, &licenseInfo)`. On success it reports whether the license is bound to this PC (`licenseInfo.linked_to_pc`) or is a generic "demo" license. On failure it prints the error and calls `identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, &execEnvInfo)` to output:
+
+- the **PC identifier**, used to issue a machine-locked license with `lccgen license issue -s <pc_identifier>`;
+- the **execution environment** (`ExecutionEnvironmentInfo`): virtualization summary, cloud provider, and virtualization detail.
+
+```bash
+./bin/hardware_detection/hardware_detection
 ```
 
-### The project doesn't compile
+You should see an output similar to this:
 
-*  try a clean checkout or remove the folder `projects` and clean the `build` folder. 
-*  try to compile `licensecc` standalone.
-*  be sure to have installed the dependencies at the right version and to be running on a supported platform.
-*  ask for help on [user forum](https://groups.google.com/forum/#!forum/licensecc).
+```
+license ERROR :
+    license file not found 
+pc signature is :
+    AABm-73pY-0R4q
 
-### Integrating into your project
-If you want to add a git submodule to your project run this command:
-
-```console
-git submodule add --recursive -b develop https://github.com/open-license-manager/open-license-manager.git extern/open-license-manager
+execution environment:
+    virtualization summary : Container
+    cloud provider         : On-premise
+    virtualization detail  : Other virtualization
 ```
 
-the cmake module to easily find LicenseCC is in  `cmake/Findlicensecc.cmake`.
-
-Inserting the following lines into you CMakeLists.txt should get things right:
-
-```cmake
-find_package(licensecc 2.0.0 REQUIRED)
-message(STATUS "LicenseCC found " ${licensecc_FOUND})
-add_executable(example src/example.cpp) 
-cmake_policy(SET CMP0028 NEW)
-target_link_libraries(example licensecc::licensecc)
+Generate an hardware locked license (change the hardware identifier to the one you get in the previous step)
+```bash
+./bin/lccgen license issue -s AABm-73pY-0R4q -p ../projects/DEFAULT -o ./bin/hardware_detection/hardware_detection.lic
 ```
+
+Run it again and you should see:
+```bash
+./bin/hardware_detection/hardware_detection
+
+[license OK]
+```
+
+
+### program_features
+
+Verifies the main program first (`acquire_license(nullptr, ...)`), then verifies a single feature:
+
+```cpp
+CallerInformations callerInfo = {"\0", "MY_AWESOME_FUNC"};
+acquire_license(&callerInfo, nullptr, &licenseInfo);
+```
+
+The `feature_name` field selects a `[feature_name]` section in the license file; an empty name verifies the project's default feature (it has the same name of the project).
+
+```bash
+./bin/program_features/program_features
+
+license ERROR :
+    license file not found 
+pc signature is :
+    AABm-73pY-0R4q
+```
+
+Generate a license. For the sake of vairety this time a demo license (no hardware locking, but limited in time).
+
+```bash
+./bin/lccgen license issue -e 20301225 -p ../projects/DEFAULT -o ./bin/program_features/program_features.lic
+```
+
+```bash
+./bin/program_features/program_features
+
+license for main software OK
+MY_AWESOME_FUNC is NOT licensed
+```
+
+Now license also the feature 'MY_AWESOME_FUNC', note that you can specify different parameters for this license.
+
+```bash
+./bin/lccgen license issue -f MY_AWESOME_FUNC -e 20281225 -p ../projects/DEFAULT -o ./bin/program_features/program_features.lic
+```
+
+```bash
+./bin/program_features/program_features
+
+license for main software OK
+MY_AWESOME_FUNC is licensed
+```
+
+## Troubleshooting
+
+- Do a clean checkout, or remove `projects/` and the `build/` folder.
+- Build `licensecc` standalone first to confirm the build environment.
+- Ask on the [forum / discussions](https://github.com/open-license-manager/licensecc/discussions).
