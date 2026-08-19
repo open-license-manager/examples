@@ -1,5 +1,5 @@
 [submodule "submodule/extern/open-license-manager"]
-	path = submodule/extern/open-license-manager
+	path = basic_features/extern/open-license-manager
 	url = https://github.com/open-license-manager/licensecc.git
 	branch = develop
 	update = rebase
