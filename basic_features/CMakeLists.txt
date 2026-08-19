@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project (simple_pc_id VERSION 2.1.0 LANGUAGES CXX)
+project (basic_features VERSION 2.1.0 LANGUAGES CXX)
 
 SET(CMAKE_DISABLE_SOURCE_CHANGES ON)
 SET(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
@@ -14,12 +14,20 @@ ENDIF(NOT LCC_PROJECT_NAME)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/")
 
-find_package(licensecc 2.1.0 REQUIRED)
-message(STATUS "LicenseCC found " ${licensecc_DIR})
-add_executable(example src/example.cpp)
-target_link_libraries(example licensecc::licensecc)
+add_subdirectory(extern/open-license-manager)
+
+add_executable(hardware_detection src/hardware_detection.cpp)
+target_link_libraries(hardware_detection licensecc::licensecc)
+set_target_properties(hardware_detection PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/hardware_detection"
+)
+
+add_executable(program_features src/program_features.cpp)
+target_link_libraries(program_features licensecc::licensecc)
+set_target_properties(program_features PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/program_features"
+)
 
 #run open-license-manager tests
 INCLUDE(CTest)

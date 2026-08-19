@@ -4,8 +4,3 @@
 	branch = develop
 	update = rebase
 	
-[submodule "program_features/extern/licensecc"]
-	path = program_features/extern/licensecc
-	url = https://github.com/open-license-manager/licensecc.git
-	branch = develop
-	update = rebase
