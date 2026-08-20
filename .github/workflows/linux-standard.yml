@@ -88,7 +88,12 @@ jobs:
         name: basic_features-ubuntu-26.04
         path: ${{ steps.strings.outputs.extract-dir }}
     - name: List downloaded artifacts (verbose)
-      run: find ${{ steps.strings.outputs.extract-dir }} -type f | sort
+      run: find ${{ steps.strings.outputs.extract-dir }} -type f
+    - name: Fix executable bit
+      run: |
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/program_features/program_features
     - name: Issue license for hardware_detection
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
