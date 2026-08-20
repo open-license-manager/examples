@@ -1,6 +1,7 @@
 /build/
 .cproject
 .project
-/.settings/
-
+.settings/
+out
 .vscode
+.vs

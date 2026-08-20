@@ -67,8 +67,8 @@ jobs:
         retention-days: 3
         name: basic_features-ubuntu-26.04
         path: |
-          ${{ steps.strings.outputs.build-output-dir }}/bin/hardware_detection/hardware_detection
-          ${{ steps.strings.outputs.build-output-dir }}/bin/program_features/program_features
+          ${{ steps.strings.outputs.build-output-dir }}/bin/hardware_detection
+          ${{ steps.strings.outputs.build-output-dir }}/bin/program_features
           ${{ steps.strings.outputs.build-output-dir }}/bin/lccgen
           ${{ github.workspace }}/basic_features/projects/
 
@@ -92,15 +92,15 @@ jobs:
     - name: Fix executable bit
       run: |
           chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen
-          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection
-          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/program_features/program_features
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/program_features
     - name: Issue license for hardware_detection
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
         ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen license issue
         -p ${{ steps.strings.outputs.extract-dir }}/projects/DEFAULT/
-        -o ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection.lic      
+        -o ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection.lic      
     - name: Run the executable
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
-        ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection/hardware_detection
+        ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection

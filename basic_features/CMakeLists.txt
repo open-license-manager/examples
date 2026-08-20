@@ -20,13 +20,13 @@ add_subdirectory(extern/open-license-manager)
 add_executable(hardware_detection hardware_detection.cpp)
 target_link_libraries(hardware_detection licensecc::licensecc)
 set_target_properties(hardware_detection PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/hardware_detection"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 add_executable(program_features program_features.cpp)
 target_link_libraries(program_features licensecc::licensecc)
 set_target_properties(program_features PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/program_features"
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 #run open-license-manager tests
