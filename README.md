@@ -7,8 +7,8 @@ Examples of integration of `licensecc` in a C++ software.
 
 * [simple pc identifier](https://github.com/open-license-manager/examples/tree/develop/simple_pc_identifier) is good if you've already compiled the library externally (that's a good starting point). 
 * [basic features](https://github.com/open-license-manager/examples/tree/develop/basic_features) a set of examples showing the basic features of the library. `licensecc` is compiled as a submodule (the preferred way).
-    - [hardware detection](https://github.com/open-license-manager/examples/tree/develop/hardware_detect): hardware detection capabilities.
-    - [program features](https://github.com/open-license-manager/examples/tree/develop/program_features): enable/disable features in your software with a license file. 
+    - [hardware detection](https://github.com/open-license-manager/examples/tree/develop/basic_features#hardware_detection): hardware detection capabilities.
+    - [program features](https://github.com/open-license-manager/examples/tree/develop/basic_features#program_features): enable/disable features in your software with a license file. 
 
 
 ## update previous versions

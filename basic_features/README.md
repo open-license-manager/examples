@@ -1,5 +1,5 @@
 
-# basic_features
+# Basic Features
 
 Two minimal C++ examples showing the basic `licensecc` features, with the library integrated as a git submodule (the recommended integration method):
 
@@ -8,7 +8,7 @@ Two minimal C++ examples showing the basic `licensecc` features, with the librar
 
 ## Prerequisites
 
-Build and install `licensecc` first, following the library's own build and dependency instructions:
+We suggest to build and install `licensecc` first, following the library's own build and dependency instructions:
 
 > You can find detailed instructions for [Linux](http://open-license-manager.github.io/licensecc/development/Build-the-library.html) 
 > or [Windows](http://open-license-manager.github.io/licensecc/development/Build-the-library-windows.html) in the project web site.
@@ -29,7 +29,8 @@ cmake -S .. -B . -DCMAKE_INSTALL_PREFIX=. -DLCC_PROJECT_NAME=DEFAULT
 cmake --build . -j8 --target install
 ```
 
-- `LCC_PROJECT_NAME` must match a project created with `lcc project create`; `DEFAULT` is the mock project shipped for these examples.
+- `LCC_PROJECT_NAME` is the name of the project (=the software) you will be itegrating `licensecc` into, You can leave it as `DEFAULT` for now, later you can issue `lcc project create` to get a folder with the right naming, generate a private key, and get a `licensecc_properties.h` where you can customize the library; 
+
 - On Windows, add `-DBOOST_ROOT=<boost install path>` to the configure line.
 
 The executables are produced in `basic_features/build/bin/hardware_detection/` and `basic_features/build/bin/program_features/`.
