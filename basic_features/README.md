@@ -13,13 +13,15 @@ We suggest to build and install `licensecc` first, following the library's own b
 > You can find detailed instructions for [Linux](http://open-license-manager.github.io/licensecc/development/Build-the-library.html) 
 > or [Windows](http://open-license-manager.github.io/licensecc/development/Build-the-library-windows.html) in the project web site.
 
-This is to solve most of the dependency/compilation issue you may encounter, in an isolated environment. This will make sure your build environment is sane, and you don't get stuck in a submodule of a submodule compilation issue.
+This is to solve most of the dependency/compilation issue you may encounter, in an isolated environment. You want to be sure your build environment is sane, and you don't get stuck in a submodule of a submodule compilation issue.
 
 The examples pull `licensecc` as a submodule at `extern/open-license-manager`. If you cloned without `--recursive`:
 
 ```console
 git submodule update --init --recursive
 ```
+
+check 'examples/basic_features/extern/open-license-manager' is populated.
 
 ## Build Linux
 
@@ -60,7 +62,7 @@ Open the folder `basic_features` folder in Visual Studio. Configure and build. T
 * Find the build targets `hardware_detection` and `program_features`. You can run them from the GUI. They'll show the license missing message (see below).
 * Run the install target for `lccgen` 
 
-Now the executables are built in 'out/build/x64-[Debug|Release]/bin/', you need to adapt the examples below to run from here.
+Now the executables are built in 'out/build/x64-[Debug|Release]/bin/'.
 If you ran the install target for `lccgen` you'll find it in 'out/install/x64-[Debug|Release]/bin/lccgen.exe'
 
 To issue a license you open a powershell (not command prompt):
