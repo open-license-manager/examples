@@ -10,6 +10,12 @@ Examples of integration of `licensecc` in a C/C++ software.
     - [hardware detection](https://github.com/open-license-manager/examples/tree/develop/basic_features#hardware_detection): hardware detection capabilities.
     - [program features](https://github.com/open-license-manager/examples/tree/develop/basic_features#program_features): enable/disable features in your software with a license file. 
 
+## Clone the project
+The project has submodules, when you clone it remember to add the `--recurse-submodules` option
+
+```
+git clone --recurse-submodules https://github.com/open-license-manager/examples.git
+```
 
 ## update previous versions
 If you have already checked out `examples` project and you want to pull recent commits:
