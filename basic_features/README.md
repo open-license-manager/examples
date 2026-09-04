@@ -10,8 +10,8 @@ Two minimal C++ examples showing the basic `licensecc` features, with the librar
 
 We suggest to build and install `licensecc` first, following the library's own build and dependency instructions:
 
-> You can find detailed instructions for [Linux](http://open-license-manager.github.io/licensecc/development/Build-the-library.html) 
-> or [Windows](http://open-license-manager.github.io/licensecc/development/Build-the-library-windows.html) in the project web site.
+> You can find detailed instructions for [Linux](https://open-license-manager.github.io/licensecc/latest/development/Build-the-library.html) 
+> or [Windows](https://open-license-manager.github.io/licensecc/latest/development/Build-the-library-windows.html) in the project web site.
 
 This is to solve most of the dependency/compilation issue you may encounter, in an isolated environment. You want to be sure your build environment is sane, and you don't get stuck in a submodule of a submodule compilation issue.
 
@@ -39,7 +39,7 @@ Without a valid license they both print `license file not found` followed by the
 
 ## Windows 11
 
-### Windows Command line (preferred)
+### Windows Command line (preferred) (VS 2026)
 
 Open a command prompt (not powershell) and initialze your build environment:
 
@@ -173,5 +173,5 @@ MY_AWESOME_FUNC is licensed
 
 - Do a clean checkout, or remove `projects/` and the `build/` folder.
 - Build `licensecc` standalone first to confirm the build environment.
-- If the test can't find the license file check [find the license](http://open-license-manager.github.io/licensecc/usage/find-the-license.html) in the docs.
+- If the test can't find the license file check [find the license](https://open-license-manager.github.io/licensecc/latest/usage/find-the-license.html) in the docs.
 - Ask on the [forum / discussions](https://github.com/open-license-manager/licensecc/discussions).

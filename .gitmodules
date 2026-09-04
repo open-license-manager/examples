@@ -2,5 +2,5 @@
 	path = basic_features/extern/open-license-manager
 	url = https://github.com/open-license-manager/licensecc.git
 	branch = develop
-	update = rebase
+	update = merge
 	

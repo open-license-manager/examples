@@ -2,8 +2,8 @@
 
 This example show how to integrate the licensing system if you already have downloaded, compiled and installed `open-license-manager` externally. This is a good starting point to test the library.
 
-You can find the compilation instructions for [Linux](http://open-license-manager.github.io/open-license-manager/development/Build-the-library.html) 
-and [Windows](http://open-license-manager.github.io/open-license-manager/development/Build-the-library-windows.html) on the project website.
+You can find the compilation instructions for [Linux](https://open-license-manager.github.io/licensecc/latest/development/Build-the-library.html) 
+and [Windows](https://open-license-manager.github.io/licensecc/latest/Build-the-library-windows.html) on the project website.
 
 ## steps
 
