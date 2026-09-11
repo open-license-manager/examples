@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char* argv[]) {
 	map<LCC_EVENT_TYPE, string> stringByEventType;
 	stringByEventType[LICENSE_OK] = "OK ";
 	stringByEventType[LICENSE_FILE_NOT_FOUND] = "license file not found ";
@@ -18,8 +18,7 @@ int main(int argc, char *argv[]) {
 	stringByEventType[IDENTIFIERS_MISMATCH] = "Calculated identifier and the one provided in license didn't match";
 
 	LicenseInfo licenseInfo;
-	size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE + 1;
-	char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE + 1];
+	char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE];
 
 	LCC_EVENT_TYPE result = acquire_license(nullptr, nullptr, &licenseInfo);
 
@@ -35,7 +34,7 @@ int main(int argc, char *argv[]) {
 	if (result != LICENSE_OK) {
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
-		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, nullptr)) {
+		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, nullptr)) {
 			cout << "hardware id is :" << endl;
 			cout << "    " << pc_identifier << endl;
 		} else {

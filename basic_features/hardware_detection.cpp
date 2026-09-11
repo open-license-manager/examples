@@ -55,11 +55,10 @@ int main(int argc, char* argv[]) {
 		}
 	}
 	if (result != LICENSE_OK) {
-		size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE;
 		char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE];
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
-		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, &execEnvInfo)) {
+		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &execEnvInfo)) {
 			cout << "pc signature is :" << endl;
 			cout << "    " << pc_identifier << endl;
 

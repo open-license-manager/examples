@@ -18,7 +18,6 @@ int main(int argc, char* argv[]) {
 		{IDENTIFIERS_MISMATCH, "Calculated identifier and the one provided in license didn't match"}};
 
 	LicenseInfo licenseInfo;
-	size_t pc_id_sz = LCC_API_PC_IDENTIFIER_SIZE;
 	char pc_identifier[LCC_API_PC_IDENTIFIER_SIZE];
 
 	LCC_EVENT_TYPE result = acquire_license(nullptr, nullptr, &licenseInfo);
@@ -28,7 +27,7 @@ int main(int argc, char* argv[]) {
 	} else {
 		cout << "license ERROR :" << endl;
 		cout << "    " << stringByEventType[result].c_str() << endl;
-		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, nullptr)) {
+		if (identify_pc(STRATEGY_DEFAULT, pc_identifier, nullptr)) {
 			cout << "pc signature is :" << endl;
 			cout << "    " << pc_identifier << endl;
 		} else {

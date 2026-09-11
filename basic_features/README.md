@@ -87,7 +87,7 @@ We will let you figure out how to fix the `program_features` example in this cas
 
 ### hardware_detection
 
-Acquires the default license with `acquire_license(nullptr, nullptr, &licenseInfo)`. On success it reports whether the license is bound to this PC (`licenseInfo.linked_to_pc`) or is a generic "demo" license. On failure it prints the error and calls `identify_pc(STRATEGY_DEFAULT, pc_identifier, &pc_id_sz, &execEnvInfo)` to output:
+Acquires the default license with `acquire_license(nullptr, nullptr, &licenseInfo)`. On success it reports whether the license is bound to this PC (`licenseInfo.linked_to_pc`) or is a generic "demo" license. On failure it prints the error and calls `identify_pc(STRATEGY_DEFAULT, pc_identifier, &execEnvInfo)` to output:
 
 - the **PC identifier**, used to issue a machine-locked license with `lccgen license issue -s <pc_identifier>`;
 - the **execution environment** (`ExecutionEnvironmentInfo`): virtualization summary, cloud provider, and virtualization detail.
