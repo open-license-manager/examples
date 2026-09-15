@@ -29,5 +29,11 @@ set_target_properties(program_features PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
+add_executable(cpp_api cpp_api.cpp)
+target_link_libraries(cpp_api licensecc::licensecc)
+set_target_properties(cpp_api PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+)
+
 #run open-license-manager tests
 INCLUDE(CTest)

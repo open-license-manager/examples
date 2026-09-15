@@ -1,10 +1,11 @@
 
 # Basic Features
 
-Two minimal C++ examples showing the basic `licensecc` features, with the library integrated as a git submodule (the recommended integration method):
+Three minimal C++ examples showing the basic `licensecc` features, with the library integrated as a git submodule (the recommended integration method):
 
 - `hardware_detection` — PC-locked licensing: acquire the license and, on failure, print the PC identifier and execution-environment information to issue a single-PC license.
 - `program_features` — verify individual 'features' of one application ("program features") in addition to the main program. Useful if you want to enable or disable functions of your software using the license file.
+- `cpp_api` — same as `hardware_detection` but using the C++ API (`license::Licensecc` class) instead of the C API.
 
 ## Prerequisites
 
@@ -33,9 +34,9 @@ cmake --build . -j8 --target install
 
 - `LCC_PROJECT_NAME` is the name of the project (=the software) you will be itegrating `licensecc` into, You can leave it as `DEFAULT` for now, later you can issue `lcc project create` to get a folder with the right naming, generate a private key, and get a `licensecc_properties.h` where you can customize the library; 
 
-The executables are produced in `basic_features/build/bin/hardware_detection` and `basic_features/build/bin/program_features`.
+The executables are produced in `basic_features/build/bin/hardware_detection`, `basic_features/build/bin/program_features` and `basic_features/build/bin/cpp_api`.
 
-Without a valid license they both print `license file not found` followed by the PC identifier.
+Without a valid license they all print `license file not found` followed by the PC identifier.
 
 ## Windows 11
 
@@ -168,6 +169,21 @@ Now license also the feature 'MY_AWESOME_FUNC', note that you can specify differ
 license for main software OK
 MY_AWESOME_FUNC is licensed
 ```
+
+### cpp_api
+
+Same flow as `hardware_detection` (taken from the `simple_pc_identifier` example), but calling the C++ API instead of the C API: instantiate the `license::Licensecc` facade and call its `acquire_license` / `identify_pc` methods.
+
+```cpp
+license::Licensecc licensecc;
+LCC_EVENT_TYPE result = licensecc.acquire_license(nullptr, nullptr, &licenseInfo);
+```
+
+```bash
+./bin/cpp_api
+```
+
+The output is the same as `hardware_detection` and the same license file works for both.
 
 ## Troubleshooting
 
