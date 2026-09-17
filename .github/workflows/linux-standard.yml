@@ -70,6 +70,7 @@ jobs:
           ${{ steps.strings.outputs.build-output-dir }}/bin/hardware_detection
           ${{ steps.strings.outputs.build-output-dir }}/bin/program_features
           ${{ steps.strings.outputs.build-output-dir }}/bin/lccgen
+          ${{ steps.strings.outputs.build-output-dir }}/extern/open-license-manager/src/inspector/lccinspector
           ${{ github.workspace }}/basic_features/projects/
 
   test-hardware-detection:
@@ -94,12 +95,24 @@ jobs:
           chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen
           chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection
           chmod a+x ${{ steps.strings.outputs.extract-dir }}/build/bin/program_features
+          chmod a+x ${{ steps.strings.outputs.extract-dir }}/extern/open-license-manager/src/inspector/lccinspector
+    - name: Hardware id
+      #The hardware id of the machine running the tests, to issue the license with lccgen option -s
+      #(same flow described in the README: lccinspector on the customer pc, then 'lccgen license issue -s <id>').
+      id: hwid
+      shell: bash
+      run: |
+        inspector=${{ steps.strings.outputs.extract-dir }}/extern/open-license-manager/src/inspector/lccinspector
+        hardware_id=$("$inspector" -q) || { echo "unable to calculate the hardware id of this machine." >&2; exit 1; }
+        echo "hardware id: $hardware_id"
+        echo "value=$hardware_id" >> "$GITHUB_OUTPUT"
     - name: Issue license for hardware_detection
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >
         ${{ steps.strings.outputs.extract-dir }}/build/bin/lccgen license issue
+        -s ${{ steps.hwid.outputs.value }}
         -p ${{ steps.strings.outputs.extract-dir }}/projects/DEFAULT/
-        -o ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection.lic      
+        -o ${{ steps.strings.outputs.extract-dir }}/build/bin/hardware_detection.lic
     - name: Run the executable
       working-directory: ${{ steps.strings.outputs.extract-dir }}
       run: >

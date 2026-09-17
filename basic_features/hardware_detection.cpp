@@ -71,5 +71,5 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	return result;
+	return result == LICENSE_OK ? 0 : 1;
 }
